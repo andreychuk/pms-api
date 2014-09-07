@@ -1,6 +1,13 @@
 <?php
 
+<<<<<<< Updated upstream
 use \Symfony\Component\HttpFoundation\Request;
+=======
+use Symfony\Component\HttpFoundation\Request;
+use Pms\Api\Application;
+use Pms\Api\WebAction\StaffWebAction;
+use Pms\Api\WebAction\RoleWebAction;
+>>>>>>> Stashed changes
 
 $app['api.interface'] = 'web';
 
@@ -34,3 +41,32 @@ $app->get('/', function (\Silex\Application $app, Request $request) {
         'env' => $app['env']
     ));
 });
+<<<<<<< Updated upstream
+=======
+
+$app->get('/api/info', function (Application $app) {
+    return $app->json([
+        'status' => true,
+        'info'   => [
+            'name'    => 'Ivan',
+            'surname' => 'Kuznetsov'
+        ]]);
+});
+
+// Staff WebAction
+$app['staff.webaction'] = $app->share(function() use ($app) {
+    return new StaffWebAction($app);
+});
+
+// Role WebAction
+$app['role.webaction'] = $app->share(function() use ($app) {
+    return new RoleWebAction($app);
+});
+
+// Staff route
+$app->get('/staff', 'staff.webaction:read');
+$app->post('/staff', 'staff.webaction:create');
+
+// Role route
+$app->get('/role', 'role.webaction:read');
+>>>>>>> Stashed changes
